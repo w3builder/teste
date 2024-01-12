@@ -9,7 +9,7 @@
 
 1. Clone o projeto: `https://github.com/filipemaulerm/segurosunimed-test.git`
 2. Execute a aplicação.
-3. Acesse: `http://localhost:8080/customers`
+3. Acesse: `http://localhost:8080/swagger-ui/`
 4. Neste ponto será retornado a lista de clientes pré-cadastrada.
 5. Faça filtros de cliente nas buscas por nome, email e genero.
 6. Adicione endpoints para criar um novo cliente, editar um cliente e excluir um cliente.
