@@ -15,9 +15,9 @@
 6. Adicione endpoints para criar um novo cliente, editar um cliente e excluir um cliente. (CONCLUÍDO)
 7. Valide os dados antes de cadastrar ou editar. (CONCLUÍDO)
 8. Pagine a listagem de clientes. (CONCLUÍDO)
-9. Possibilite o cadastro de múltiplos endereços para um cliente.
+9. Possibilite o cadastro de múltiplos endereços para um cliente. (CONCLUÍDO)
 10. No cadastro de endereço permita inserir apenas o CEP carregando os dados via consumo do serviço: https://viacep.com.br/ (CONCLUÍDO / foi criado um serviço local)
-11. Faça filtros de clientes nas buscas agora para os campos cidade e estado
+11. Faça filtros de clientes nas buscas agora para os campos cidade e estado (CONCLUÍDO)
 12. Envie a url do seu repositório no github para análise.
 
 Obs.: Será um diferencial implementações como: tratamento de exceções (RestControllerAdvice)(CONCLUÍDO), 
