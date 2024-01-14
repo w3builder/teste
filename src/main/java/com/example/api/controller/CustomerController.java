@@ -169,7 +169,7 @@ public class CustomerController {
             @ApiResponse(code = 204, message = "Customer deleted successfully"),
             @ApiResponse(code = 404, message = "Customer not found")
     })
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
     	service.delete(id);
     	return ResponseEntity.noContent().build();
