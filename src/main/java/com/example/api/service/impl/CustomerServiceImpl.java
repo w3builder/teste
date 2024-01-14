@@ -52,6 +52,11 @@ public class CustomerServiceImpl implements CustomerService{
 		return repository.findByNameLikeOrEmailOrGender("%"+name+"%", email, gender);
 	}
 
+	@Transactional(readOnly = true)
+	public List<Customer> findByAddressesCityAndState(String city, String state) {
+		return repository.findByAddressesCityOrddressesState(city, state);
+	}
+
 	@Transactional
 	public Customer create(Customer customerToCreate) {
 		
@@ -63,15 +68,16 @@ public class CustomerServiceImpl implements CustomerService{
             throw new BusinessException("This email already exists.");
         }
         
+        customerToCreate.getAddresses().forEach(a -> a.setCustomer(customerToCreate));
         return repository.save(customerToCreate);
 	}
 
 	@Transactional
-	public Customer update(Long id, Customer customerToUpdate) {
+	public Customer update(Customer customerToUpdate) {
 		
-		this.validateChangeableId(id, "updated");
+		this.validateChangeableId(customerToUpdate.getId(), "updated");
 		
-		Customer dbCustomer = this.findById(id);
+		Customer dbCustomer = this.findById(customerToUpdate.getId());
 		
         if (!dbCustomer.getId().equals(customerToUpdate.getId())) {
             throw new BusinessException("Update IDs must be the same.");
@@ -81,11 +87,9 @@ public class CustomerServiceImpl implements CustomerService{
             throw new BusinessException("This email already exists.");
         }
 
-        dbCustomer.setName(customerToUpdate.getName());
-        dbCustomer.setEmail(customerToUpdate.getEmail());
-        dbCustomer.setGender(customerToUpdate.getGender());
+        customerToUpdate.getAddresses().forEach(a -> a.setCustomer(customerToUpdate));
         
-        return this.repository.save(dbCustomer);
+        return this.repository.save(customerToUpdate);
 	}
 
 	@Transactional
@@ -100,4 +104,5 @@ public class CustomerServiceImpl implements CustomerService{
             throw new BusinessException(String.format("Customer with ID %d can not be %s.", UNCHANGEABLE_CUSTOMER_ID, operation));
         }
     }
+
 }

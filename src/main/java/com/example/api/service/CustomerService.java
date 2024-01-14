@@ -12,4 +12,5 @@ public interface CustomerService extends CrudService<Long, Customer> {
 	List<Customer> findByNameLike(String name);
 	Page<Customer> findAllPageable(Pageable pageable);
 	List<Customer> findByNameLikeOrEmailOrGender(String name, String email, String gender);
+	List<Customer> findByAddressesCityAndState(String city, String state);
 }

@@ -19,18 +19,29 @@ import lombok.NoArgsConstructor;
 @Table(name = "ADDRESS")
 public class Address {
 	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String cep;
-    private String logradouro;
-    private String complemento;
-    private String bairro;
-    private String localidade;
-    private String uf;
+	private String postalcode;
+    private String street;
+    private String complement;
+    private String neighborhood;
+    private String city;
+    private String state;
     
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
+
+    public Address(String postalcode, String street, String complement, 
+    		String neighborhood, String city, String state) {
+    	this.postalcode = postalcode;
+    	this.street = street;
+    	this.complement = complement;
+    	this.neighborhood = neighborhood;
+    	this.city = city;
+    	this.state = state;
+    }
 }

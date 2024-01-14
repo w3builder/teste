@@ -111,6 +111,21 @@ public class CustomerController {
 		return ResponseEntity.ok(cursomerDto);
 	}
 	
+	@GetMapping("/address/filter/{city}/{state}")
+	@ApiOperation(value = "Get curtomers find by address filters", notes = "Retrieve a list of customers find by address filters")
+	@ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved"),
+            @ApiResponse(code = 404, message = "Name not found")
+    })
+	public ResponseEntity<List<CustomerDto>> findByCustomerByAddressFilters(
+				@PathParam("city") String city,
+				@PathParam("state") String state
+			) {
+		var customers = service.findByAddressesCityAndState(city, state);
+		var cursomerDto = customers.stream().map(CustomerDto::new).collect(Collectors.toList());
+		return ResponseEntity.ok(cursomerDto);
+	}
+	
 	@GetMapping("/address/insert/viacep/{cep}")
 	@ApiOperation(value = "Fill customer address fields by ViaCepSerivce")
 	@ApiResponses(value = {
@@ -144,8 +159,8 @@ public class CustomerController {
             @ApiResponse(code = 422, message = "Invalid customer data provided")
     })
     @PutMapping
-    public ResponseEntity<CustomerDto> update(@PathVariable Long id, @RequestBody CustomerDto dto) {
-    	var customer = service.update(id, dto.toModel());
+    public ResponseEntity<CustomerDto> update(@RequestBody CustomerDto dto) {
+    	var customer = service.update(dto.toModel());
     	return ResponseEntity.ok(new CustomerDto(customer));
     }
 

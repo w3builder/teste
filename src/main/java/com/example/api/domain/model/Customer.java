@@ -1,10 +1,15 @@
 package com.example.api.domain.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -35,10 +40,7 @@ public class Customer {
 	@Column(nullable = false)
 	@NotEmpty
 	private String gender;
-	
-	public Customer(String name, String email, String gender) {
-		this.name = name;
-		this.email = email;
-		this.gender = gender;
-	}
+
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Address> addresses = new ArrayList<>();
 }
