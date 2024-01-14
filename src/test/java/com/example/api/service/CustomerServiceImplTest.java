@@ -2,6 +2,7 @@ package com.example.api.service;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.example.api.controller.dto.AddressDto;
+import com.example.api.controller.dto.CustomerDto;
 import com.example.api.domain.model.Customer;
 
 @ExtendWith(SpringExtension.class)
@@ -70,6 +73,21 @@ public class CustomerServiceImplTest {
 
     @Test
     public void testCreate() {
+    	
+    	List<AddressDto> addresses = new ArrayList<>();
+    	
+    	AddressDto addressDto = AddressDto.builder().postalcode("60000000")
+    			.street("5 avenue").complement("111").neighborhood("Broklin").city("New York")
+    			.state("NY").build();
+    	
+    	addresses.add(addressDto);
+
+    	CustomerDto customerDto = CustomerDto.builder()
+    			.name("Tommy").email("tommy@gmail.com").gender("Male").addresses(addresses)
+    			.build();
+    	
+    	Customer result = customerService.create(customerDto.toModel());
+    	assertNotNull(result);				
     }
 
     @Test
