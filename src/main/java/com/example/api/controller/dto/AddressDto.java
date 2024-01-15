@@ -42,7 +42,13 @@ public class AddressDto {
 	}
 	
 	public Address toModel() {
-		return new Address(this.postalcode, this.street, this.complement, 
-				this.neighborhood, this.city, this.state);
+		return Address.builder()
+				.postalcode(this.postalcode)
+				.state(this.street)
+				.complement(this.complement)
+				.neighborhood(this.neighborhood)
+				.city(this.city)
+				.state(this.state)
+				.build();
 	}
 }

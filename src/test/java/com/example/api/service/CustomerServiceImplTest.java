@@ -1,32 +1,32 @@
 package com.example.api.service;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.example.api.controller.dto.AddressDto;
 import com.example.api.controller.dto.CustomerDto;
 import com.example.api.domain.model.Customer;
 
-@ExtendWith(SpringExtension.class)
 @SpringBootTest
+@ActiveProfiles("test")
 public class CustomerServiceImplTest {
 
     @Autowired
     private CustomerService customerService;
 
     @Test
-    public void testFindAllPageable() {
-        Page<Customer> result = customerService.findAllPageable(PageRequest.of(0, 10));
+    public void testFindAllPageableSuccess() {
+        Page<Customer> result = customerService.findAllPageable(PageRequest.of(0, 5));
         assertNotNull(result);
     }
 
@@ -76,14 +76,21 @@ public class CustomerServiceImplTest {
     	
     	List<AddressDto> addresses = new ArrayList<>();
     	
-    	AddressDto addressDto = AddressDto.builder().postalcode("60000000")
-    			.street("5 avenue").complement("111").neighborhood("Broklin").city("New York")
+    	AddressDto addressDto = AddressDto.builder()
+    			.postalcode("60000000")
+    			.street("5 avenue")
+    			.complement("111")
+    			.neighborhood("Broklin")
+    			.city("New York")
     			.state("NY").build();
     	
     	addresses.add(addressDto);
 
     	CustomerDto customerDto = CustomerDto.builder()
-    			.name("Tommy").email("tommy@gmail.com").gender("Male").addresses(addresses)
+    			.name("Tommy")
+    			.email("tommy@gmail.com")
+    			.gender("Male")
+    			.addresses(addresses)
     			.build();
     	
     	Customer result = customerService.create(customerDto.toModel());
@@ -92,9 +99,33 @@ public class CustomerServiceImplTest {
 
     @Test
     public void testUpdate() {
+    	
+    	List<AddressDto> addresses = new ArrayList<>();
+    	
+    	AddressDto addressDto = AddressDto.builder()
+    			.postalcode("60000000")
+    			.street("5 avenue")
+    			.complement("111")
+    			.neighborhood("Broklin")
+    			.city("New York")
+    			.state("NY").build();
+    	
+    	addresses.add(addressDto);
+
+    	CustomerDto customerDto = CustomerDto.builder()
+    			.name("Tommy")
+    			.email("tommy2@gmail.com")
+    			.gender("Male")
+    			.addresses(addresses)
+    			.build();
+    	
+    	Customer result = customerService.update(2L, customerDto.toModel());
+    	
+    	assertNotNull(result);	
     }
 
     @Test
     public void testDelete() {
+    	customerService.delete(3L);
     }
 }

@@ -73,13 +73,13 @@ public class CustomerServiceImpl implements CustomerService{
 	}
 
 	@Transactional
-	public Customer update(Customer customerToUpdate) {
+	public Customer update(Long id, Customer customerToUpdate) {
 		
-		this.validateChangeableId(customerToUpdate.getId(), "updated");
+		this.validateChangeableId(id, "updated");
 		
-		Customer dbCustomer = this.findById(customerToUpdate.getId());
+		Customer dbCustomer = this.findById(id);
 		
-        if (!dbCustomer.getId().equals(customerToUpdate.getId())) {
+        if (!dbCustomer.getId().equals(id)) {
             throw new BusinessException("Update IDs must be the same.");
         }
         
@@ -87,6 +87,7 @@ public class CustomerServiceImpl implements CustomerService{
             throw new BusinessException("This email already exists.");
         }
 
+        customerToUpdate.setId(id);
         customerToUpdate.getAddresses().forEach(a -> a.setCustomer(customerToUpdate));
         
         return this.repository.save(customerToUpdate);

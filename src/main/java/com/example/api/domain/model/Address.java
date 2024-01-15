@@ -20,7 +20,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name = "ADDRESS")
 public class Address {
-	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

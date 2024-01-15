@@ -16,14 +16,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CustomerDto {
 	
-	private Long id;
 	private String name;
 	private String email;
 	private String gender;
 	private List<AddressDto> addresses;
 	
 	public CustomerDto(Customer entity) {
-		this.id = entity.getId();
 		this.name = entity.getName();
 		this.email = entity.getEmail();
 		this.gender = entity.getGender();
@@ -31,8 +29,11 @@ public class CustomerDto {
 	}
 	
 	public Customer toModel() {
-		return new Customer(this.id, this.name, this.email, this.gender, 
-				this.addresses.stream().map(address -> address.toModel())
-				.collect(Collectors.toList()));
+		return Customer.builder()
+				.name(this.name)
+				.email(this.email)
+				.gender(this.gender)
+				.addresses(this.addresses.stream().map(address -> address.toModel())
+				.collect(Collectors.toList())).build();
 	}
 }

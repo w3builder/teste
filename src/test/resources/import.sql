@@ -1,0 +1,10 @@
+INSERT INTO customer (id, name, email, gender) VALUES(1, 'João Silva', 'joao.silva@email.com', 'Male');
+INSERT INTO customer (id, name, email, gender) VALUES(2, 'Maria Santos', 'maria.santos@email.com', 'Female');
+INSERT INTO customer (id, name, email, gender) VALUES(3, 'Carlos Oliveira', 'carlos.oliveira@email.com', 'Male');
+INSERT INTO customer (id, name, email, gender) VALUES(4, 'Ana Pereira', 'ana.pereira@email.com', 'Female');
+INSERT INTO customer (id, name, email, gender) VALUES(5, 'Rafael Souza', 'rafael.souza@email.com', 'Male');
+INSERT INTO customer (id, name, email, gender) VALUES(6, 'Camila Lima', 'camila.lima@email.com', 'Female');
+INSERT INTO customer (id, name, email, gender) VALUES(7, 'Fernando Santos', 'fernando.santos@email.com', 'Male');
+INSERT INTO customer (id, name, email, gender) VALUES(8, 'Isabela Oliveira', 'isabela.oliveira@email.com', 'Female');
+INSERT INTO customer (id, name, email, gender) VALUES(9, 'Lucas Silva', 'lucas.silva@email.com', 'Male');
+INSERT INTO customer (id, name, email, gender) VALUES(10, 'Juliana Pereira', 'juliana.pereira@email.com', 'Female');

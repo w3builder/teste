@@ -68,7 +68,7 @@ public class CustomerController {
 		return ResponseEntity.ok(customersDto);
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/find/{id}")
     @ApiOperation(value = "Get Customer by ID", notes = "Provide an ID to get the Customer details")
 	@ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved list"),
@@ -79,7 +79,7 @@ public class CustomerController {
 		return ResponseEntity.ok(customerDto);
 	}
 	
-	@GetMapping("/{name}")
+	@GetMapping("find/name/{name}")
 	@ApiOperation(value = "Get curtomers find by name", notes = "Retrieve a list of customers find by name filter")
 	@ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved"),
@@ -158,9 +158,9 @@ public class CustomerController {
             @ApiResponse(code = 404, message = "Customer not found"),
             @ApiResponse(code = 422, message = "Invalid customer data provided")
     })
-    @PutMapping
-    public ResponseEntity<CustomerDto> update(@RequestBody CustomerDto dto) {
-    	var customer = service.update(dto.toModel());
+    @PutMapping("/{id}")
+    public ResponseEntity<CustomerDto> update(@PathVariable("id") Long id, @RequestBody CustomerDto dto) {
+    	var customer = service.update(id, dto.toModel());
     	return ResponseEntity.ok(new CustomerDto(customer));
     }
 
